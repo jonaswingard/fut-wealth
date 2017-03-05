@@ -1,0 +1,6 @@
+File structure
+https://www.terlici.com/2014/08/25/best-practices-express-structure.html
+
+DB
+nedb
+http://stackabuse.com/nedb-a-lightweight-javascript-database/

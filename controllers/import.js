@@ -1,14 +1,10 @@
 var express = require('express');
 var jsdom = require('node-jsdom');
-var low = require('lowdb')
+var Import = require('../models/import');
 var router = express.Router();
 
 const jquery = 'http://code.jquery.com/jquery.js';
 const url = 'https://www.futbin.com/market/';
-const db = low('fut.json')
-
-db.defaults({ rising: { items: [] } })
-	.write();
 
 router.get('/', function(req, res, next) {
   res.send('this is fut! or? no...');
@@ -29,12 +25,7 @@ router.get('/rising', function(req, res, next) {
   			};
   		}).toArray();
 
-			db.get('rising.items')
-			.push({
-				players: items,
-				date: new Date()
-			})
-			.write();
+			Import.saveRising(items);
 
       res.send({ message: 'Items imported succesfully.' });
   	}

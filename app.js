@@ -5,10 +5,10 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var index = require('./routes/index');
-var users = require('./routes/users');
-var importFUT = require('./routes/import');
-var players = require('./routes/players');
+var index = require('./controllers/index');
+var users = require('./controllers/users');
+var importFUT = require('./controllers/import');
+var players = require('./controllers/players');
 
 var app = express();
 
