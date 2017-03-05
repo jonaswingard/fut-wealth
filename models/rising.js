@@ -1,15 +1,19 @@
 var low = require('lowdb');
-const db = low('fut.json')
+const db = low('db/fut.json');
 
 db.defaults({ rising: { items: [] } })
 	.write();
 
-exports.saveRising = function (items) {
-  console.log('saving using model');
+exports.save = function (items) {
   db.get('rising.items')
   .push({
     players: items,
     date: new Date()
   })
   .write();
+};
+
+exports.getAll = function () {
+  return db.get('rising.items')
+  .value();
 };

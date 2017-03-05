@@ -8,7 +8,7 @@ var bodyParser = require('body-parser');
 var index = require('./controllers/index');
 var users = require('./controllers/users');
 var importFUT = require('./controllers/import');
-var players = require('./controllers/players');
+var rising = require('./controllers/rising');
 
 var app = express();
 
@@ -27,7 +27,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/users', users);
 app.use('/import', importFUT);
-app.use('/players', players);
+app.use('/rising', rising);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

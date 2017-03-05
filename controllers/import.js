@@ -1,6 +1,6 @@
 var express = require('express');
 var jsdom = require('node-jsdom');
-var Import = require('../models/import');
+var Rising = require('../models/rising');
 var router = express.Router();
 
 const jquery = 'http://code.jquery.com/jquery.js';
@@ -25,7 +25,7 @@ router.get('/rising', function(req, res, next) {
   			};
   		}).toArray();
 
-			Import.saveRising(items);
+			Rising.save(items);
 
       res.send({ message: 'Items imported succesfully.' });
   	}
