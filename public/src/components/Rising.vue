@@ -3,7 +3,7 @@
     <br>
     <div v-for="fetch in fetched">
       <details>
-        <summary>{{fetch.date}}</summary>
+        <summary>{{filterDate(fetch.date)}}</summary>
         <table>
           <thead>
             <tr>
@@ -36,7 +36,14 @@ export default {
   },
   data: () => ({
     fetched: []
-  })
+  }),
+  methods: {
+    filterDate: function (date) {
+      // TODO moment this
+      // use as custom filter
+      return new Date(date)
+    }
+  }
 }
 </script>
 
