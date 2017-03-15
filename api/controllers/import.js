@@ -10,7 +10,7 @@ router.get('/', function(req, res, next) {
   res.send('this is fut! or? no...');
 });
 
-router.get('/rising', function(req, res, next) {
+router.post('/rising', function(req, res, next) {
   jsdom.env(url,[jquery],
   	function (errors, window) {
   		const $ = window.$;
@@ -27,7 +27,10 @@ router.get('/rising', function(req, res, next) {
 
 			Rising.save(items);
 
-      res.send({ message: 'Items imported succesfully.' });
+      res.send({
+        message: items.length + ' items imported succesfully.',
+        items: Rising.getAll()
+      });
   	}
   );
 });

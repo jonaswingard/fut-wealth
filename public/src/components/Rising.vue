@@ -1,5 +1,7 @@
 <template>
   <div class="rising">
+    <button v-on:click="importRising">Import</button>
+    <br>
     <br>
     <div v-for="fetch in fetched">
       <details>
@@ -30,7 +32,6 @@ export default {
   name: 'rising',
   beforeMount () {
     this.$http.get('/api/rising').then((response) => {
-      console.log(response.data)
       this.fetched = response.data
     })
   },
@@ -38,10 +39,16 @@ export default {
     fetched: []
   }),
   methods: {
+    importRising: function (event) {
+      this.$http.post('/api/import/rising').then((response) => {
+        this.fetched = response.data.items
+      })
+    },
     filterDate: function (date) {
       // TODO moment this
       // use as custom filter
-      return new Date(date)
+
+      return new Date(date).toLocaleString()
     }
   }
 }

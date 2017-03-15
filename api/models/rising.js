@@ -15,5 +15,7 @@ exports.save = function (items) {
 
 exports.getAll = function () {
   return db.get('rising.items')
-  .value();
+		.sortBy('date')
+		.reverse()
+  	.value();
 };

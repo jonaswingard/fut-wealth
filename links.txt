@@ -4,3 +4,13 @@ https://www.terlici.com/2014/08/25/best-practices-express-structure.html
 DB
 nedb
 http://stackabuse.com/nedb-a-lightweight-javascript-database/
+
+Filters in VueJS
+https://www.codecourse.com/lessons/filters-in-vue-2
+
+Todo
+Moment to present time
+Jobb som importerar
+Jämföra spelare med tidigare importer
+websockets
+Hosta appen nånstans
