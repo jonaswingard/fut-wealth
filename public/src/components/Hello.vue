@@ -4,9 +4,9 @@
     <h2>Links</h2>
     <ul>
       <li><router-link to="/">Start</router-link></li>
+      <li><router-link to="/login">Login</router-link></li>
       <li><router-link to="/rising">Rising</router-link></li>
     </ul>
-
   </div>
 </template>
 

@@ -4,3 +4,6 @@ public
 
 api
 `npm start`
+
+db
+`sudo mongod`
