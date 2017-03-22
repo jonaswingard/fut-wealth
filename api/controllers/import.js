@@ -1,6 +1,7 @@
 var express = require('express');
 var jsdom = require('node-jsdom');
 var Rising = require('../models/rising');
+var auth = require ('./authentication');
 var router = express.Router();
 
 const jquery = 'http://code.jquery.com/jquery.js';
@@ -10,7 +11,7 @@ router.get('/', function(req, res, next) {
   res.send('this is fut! or? no...');
 });
 
-router.post('/rising', function(req, res, next) {
+router.post('/rising', auth.isAuthenticated, function(req, res, next) {
   jsdom.env(url,[jquery],
   	function (errors, window) {
   		const $ = window.$;
