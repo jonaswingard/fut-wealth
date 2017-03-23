@@ -18,6 +18,8 @@
 </template>
 
 <script>
+import config from '../config'
+
 export default {
   name: 'login',
   data: () => ({
@@ -36,11 +38,12 @@ export default {
       })
     },
     onLogout: function () {
-      this.$http.get('/api/logout').then((response) => {
-        if (response.status === 200) {
-          this.$router.push('/')
-        }
-      })
+      config.loginText = new Date()
+      // this.$http.get('/api/logout').then((response) => {
+      //   if (response.status === 200) {
+      //     this.$router.push('/')
+      //   }
+      // })
     }
   }
 }

@@ -1,6 +1,6 @@
 <template>
-  <div class="rising">
-    <button v-on:click="importRising">Import</button>
+  <div class="trending">
+    <button v-on:click="importTrending">Import</button>
     <br>
     <br>
     <div v-for="fetch in fetched">
@@ -29,9 +29,8 @@
 
 <script>
 export default {
-  name: 'rising',
   beforeMount () {
-    this.$http.get('/api/rising').then((response) => {
+    this.$http.get('/api/trending').then((response) => {
       this.fetched = response.data
     })
   },
@@ -39,8 +38,8 @@ export default {
     fetched: []
   }),
   methods: {
-    importRising: function (event) {
-      this.$http.post('/api/import/rising').then((response) => {
+    importTrending: function (event) {
+      this.$http.post('/api/import/trending').then((response) => {
         this.fetched = response.data.items
       })
     },

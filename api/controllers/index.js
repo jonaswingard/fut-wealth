@@ -46,4 +46,8 @@ router.get('/ping', auth.isAuthenticated, function (req, res, next) {
   res.status(200).send('pong');
 });
 
+router.get('/isauthenticated', function (req, res, next) {
+  res.send(req.isAuthenticated());
+});
+
 module.exports = router;

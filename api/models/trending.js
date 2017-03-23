@@ -1,11 +1,11 @@
 var low = require('lowdb');
 const db = low('db/fut.json');
 
-db.defaults({ rising: { items: [] } })
+db.defaults({ trending: { items: [] } })
 	.write();
 
 exports.save = function (items) {
-  db.get('rising.items')
+  db.get('trending.items')
   .push({
     players: items,
     date: new Date()
@@ -14,8 +14,12 @@ exports.save = function (items) {
 };
 
 exports.getAll = function () {
-  return db.get('rising.items')
+  return db.get('trending.items')
 		.sortBy('date')
 		.reverse()
   	.value();
 };
+
+exports.foobar = function () {
+	console.log('foobar');
+}

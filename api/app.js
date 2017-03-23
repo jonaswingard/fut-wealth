@@ -12,7 +12,8 @@ var LocalStrategy = require('passport-local').Strategy;
 var index = require('./controllers/index');
 var users = require('./controllers/users');
 var importFUT = require('./controllers/import');
-var rising = require('./controllers/rising');
+var trending = require('./controllers/trending');
+var fitness = require('./controllers/fitness');
 
 var app = express();
 
@@ -41,7 +42,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/users', users);
 app.use('/import', importFUT);
-app.use('/rising', rising);
+app.use('/trending', trending);
+app.use('/fitness', fitness);
 
 var Account = require('./models/account');
 passport.use(new LocalStrategy(Account.authenticate()));

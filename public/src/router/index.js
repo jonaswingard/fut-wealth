@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Hello from '@/components/Hello'
-import Rising from '@/components/Rising'
+import Trending from '@/components/Trending'
 import Login from '@/components/Login'
 
 Vue.use(Router)
@@ -14,9 +14,9 @@ export default new Router({
       component: Hello
     },
     {
-      path: '/rising',
-      name: 'Rising',
-      component: Rising
+      path: '/trending',
+      name: 'Trending',
+      component: Trending
     },
     {
       path: '/login',
