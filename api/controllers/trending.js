@@ -4,7 +4,10 @@ var auth = require ('./authentication');
 var router = express.Router();
 
 router.get('/', auth.isAuthenticated, function(req, res, next) {
-  res.send(Trending.getAll());
+  Trending.getAll().then(function (result) {
+    res.send(result);
+  })
+
 });
 
 module.exports = router;

@@ -11,9 +11,14 @@
       <li class="menu-item">
         <router-link to="/trending">Trending</router-link>
       </li>
+      <li class="menu-item">
+        <router-link to="/fitness">Fitness</router-link>
+      </li>
     </ul>
 
+    Logintext:
     {{loginText}}
+
     <router-view></router-view>
   </div>
 </template>

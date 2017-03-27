@@ -5,7 +5,7 @@
         <input placeholder="username" v-model="username">
       </div>
       <div>
-        <input placeholder="password" v-model="password">
+        <input placeholder="password" type="password" v-model="password">
       </div>
       <div>
         <button type="submit">Login</button>

@@ -23,6 +23,6 @@ module.exports = {
     return fitness.save();
   },
   getAll: function () {
-    return Fitness.find();
+    return Fitness.find().sort({date: -1});
   }
 }

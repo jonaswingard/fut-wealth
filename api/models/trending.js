@@ -1,25 +1,29 @@
-var low = require('lowdb');
-const db = low('db/fut.json');
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 
-db.defaults({ trending: { items: [] } })
-	.write();
+var Trending = mongoose.model('Trending', new Schema({
+    date: Date,
+    items: [
+	    {
+	      title: String,
+	      price: String,
+				trend: String
+	    }
+    ]
+}));
 
-exports.save = function (items) {
-  db.get('trending.items')
-  .push({
-    players: items,
-    date: new Date()
-  })
-  .write();
-};
+mongoose.Promise = global.Promise;
 
-exports.getAll = function () {
-  return db.get('trending.items')
-		.sortBy('date')
-		.reverse()
-  	.value();
-};
+module.exports = {
+  save: function (items) {
+    var trending = new Trending({
+      date: new Date(),
+      items: items
+    });
 
-exports.foobar = function () {
-	console.log('foobar');
+    return trending.save();
+  },
+  getAll: function () {
+    return Trending.find().sort({date: -1});
+  }
 }

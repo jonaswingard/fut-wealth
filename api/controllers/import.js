@@ -11,6 +11,16 @@ router.get('/', function(req, res, next) {
   res.send('this is fut! or? no...');
 });
 
+// router.get('/trending', auth.isAuthenticated, function(req, res, next) {
+//   Trending.save([{
+//     title: 'foo',
+//     price: '500',
+//     trend: '+3%'
+//   }]).then(function (result) {
+//     res.send(result);
+//   })
+// });
+
 router.post('/trending', auth.isAuthenticated, function(req, res, next) {
   jsdom.env('https://www.futbin.com/market/',[jquery],
   	function (errors, window) {
@@ -20,23 +30,28 @@ router.post('/trending', auth.isAuthenticated, function(req, res, next) {
   		var items = rows.map(function () {
   			var item = $(this);
   			return {
-  				name: item.find('a').text(),
-  				price: item.find('td:eq(0)').children().remove().end().text().trim(),
+  				title: item.find('a').text(),
+  				price: item.find('td:eq(0)').children().remove().end().text().trim().replace(',',''),
   				trend: item.find('td:last').text().replace(/\s+/g, '')
   			};
   		}).toArray();
 
-			Trending.save(items);
+      console.log(items);
 
-      res.send({
-        message: items.length + ' items imported succesfully.',
-        items: Trending.getAll()
+			Trending.save(items).then(function () {
+        res.send('ok');
       });
+
+      // res.send({
+      //   message: items.length + ' items imported succesfully.',
+      //   items: Trending.getAll()
+      // });
+      // res.send('ok');
   	}
   );
 });
 
-router.get('/fitness', function(req, res, next) {
+router.post('/fitness', auth.isAuthenticated, function(req, res, next) {
   jsdom.env('https://www.futbin.com/consumables/Fitness',[jquery],
   	function (errors, window) {
   		const $ = window.$;

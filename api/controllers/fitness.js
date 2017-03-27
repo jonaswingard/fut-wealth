@@ -3,7 +3,7 @@ var Fitness = require('../models/fitness');
 var auth = require ('./authentication');
 var router = express.Router();
 
-router.get('/', function(req, res, next) {
+router.get('/', auth.isAuthenticated, function(req, res, next) {
   Fitness.getAll().then(function (result) {
     res.send(result);
   });

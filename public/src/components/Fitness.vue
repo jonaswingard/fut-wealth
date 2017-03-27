@@ -1,6 +1,6 @@
 <template>
-  <div class="trending">
-    <button v-on:click="importTrending">Import</button>
+  <div class="fitness">
+    <button v-on:click="importFitness">Import</button>
     <br>
     <br>
     <div v-for="fetch in fetched">
@@ -18,7 +18,6 @@
             <tr v-for="item in fetch.items">
               <td>{{item.title}}</td>
               <td>{{item.price}}</td>
-              <td>{{item.trend}}</td>
             </tr>
           </tbody>
         </table>
@@ -30,7 +29,7 @@
 <script>
 export default {
   beforeMount () {
-    this.$http.get('/api/trending').then((response) => {
+    this.$http.get('/api/fitness').then((response) => {
       this.fetched = response.data
     })
   },
@@ -38,8 +37,8 @@ export default {
     fetched: []
   }),
   methods: {
-    importTrending: function (event) {
-      this.$http.post('/api/import/trending').then((response) => {
+    importFitness: function (event) {
+      this.$http.post('/api/import/fitness').then((response) => {
         this.fetched = response.data.items
       })
     },

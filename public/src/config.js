@@ -1,3 +1,3 @@
 export default {
-  loginText: ''
+  loginText: 'from config'
 }
