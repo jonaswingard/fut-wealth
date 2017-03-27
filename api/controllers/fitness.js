@@ -9,4 +9,10 @@ router.get('/', auth.isAuthenticated, function(req, res, next) {
   });
 });
 
+router.get('/latest', auth.isAuthenticated, function(req, res, next) {
+  Fitness.getAll(1).then(function (result) {
+    res.send(result);
+  });
+});
+
 module.exports = router;

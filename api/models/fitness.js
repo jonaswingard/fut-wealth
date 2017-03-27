@@ -22,7 +22,11 @@ module.exports = {
 
     return fitness.save();
   },
-  getAll: function () {
-    return Fitness.find().sort({date: -1});
+  getAll: function (limit) {
+    if (limit) {
+      return Fitness.find().sort({date: -1}).limit(limit);
+    } else {
+      return Fitness.find().sort({date: -1});
+    }
   }
 }

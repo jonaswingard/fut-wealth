@@ -23,7 +23,11 @@ module.exports = {
 
     return trending.save();
   },
-  getAll: function () {
-    return Trending.find().sort({date: -1});
+  getAll: function (limit) {
+    if (limit) {
+      return Trending.find().sort({date: -1}).limit(limit);      
+    } else {
+      return Trending.find().sort({date: -1});
+    }
   }
 }

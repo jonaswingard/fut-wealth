@@ -40,13 +40,6 @@ export default {
       }
     })
   }
-  // computed: {
-  //   loginText: function () {
-  //     // config.isLoggedIn()
-  //     // return 'foobar'
-  //
-  //   }
-  // }
 }
 </script>
 
