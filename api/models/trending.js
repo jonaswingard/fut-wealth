@@ -25,7 +25,7 @@ module.exports = {
   },
   getAll: function (limit) {
     if (limit) {
-      return Trending.find().sort({date: -1}).limit(limit);      
+      return Trending.find().sort({date: -1}).limit(limit);
     } else {
       return Trending.find().sort({date: -1});
     }

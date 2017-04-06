@@ -1,0 +1,31 @@
+version: "2"
+services:
+  public:
+    build: ./public
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./public:/www
+    tty: true
+  api:
+    build: ./api
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./api:/www
+    links:
+      - mongo
+    tty: true
+    environment:
+      - MONGO_CONNECTION=mongodb://user:password@mongo/futwealth
+  mongo:
+    image: mongo
+    ports:
+      - "29017:27017"
+    command: --auth
+    volumes_from:
+      - mongodata
+  mongodata:
+    image: tianon/true
+    volumes:
+      - ./data/db:/data/db
