@@ -2,5 +2,6 @@ node_modules
 /data
 /dump
 /local-todo.txt
+/docker-compose.yml
 *.swp
 *.log
