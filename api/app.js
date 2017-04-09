@@ -14,6 +14,7 @@ var users = require('./controllers/users');
 var importFUT = require('./controllers/import');
 var trending = require('./controllers/trending');
 var fitness = require('./controllers/fitness');
+var job = require('./controllers/job');
 
 var app = express();
 
@@ -44,6 +45,7 @@ app.use('/users', users);
 app.use('/import', importFUT);
 app.use('/trending', trending);
 app.use('/fitness', fitness);
+app.use('/job', job);
 
 var Account = require('./models/account');
 passport.use(new LocalStrategy(Account.authenticate()));

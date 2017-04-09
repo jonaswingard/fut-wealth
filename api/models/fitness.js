@@ -1,5 +1,8 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var jsdom = require('node-jsdom');
+const jquery = 'http://code.jquery.com/jquery.js';
+
 
 var Fitness = mongoose.model('Fitness', new Schema({
     date: Date,
@@ -28,5 +31,25 @@ module.exports = {
     } else {
       return Fitness.find().sort({date: -1});
     }
+  },
+  import: function () {
+    return new Promise((resolve, reject) => {
+      jsdom.env('https://www.futbin.com/consumables/Fitness',[jquery],
+      	function (errors, window) {
+      		const $ = window.$;
+      		var rows = $('.cons_list_header_ps4').parent().find('tbody tr');
+
+      		var items = rows.map(function () {
+      			var item = $(this);
+      			return {
+      				title: item.find('td:eq(0)').text().replace(/\s+/g, ''),
+      				price: item.find('td:eq(1)').text().replace(/\s+/g, '')
+      			};
+      		}).toArray();
+
+    			resolve(items);
+      	}
+      );
+    });
   }
 }
