@@ -15,10 +15,6 @@
         <router-link to="/fitness">Fitness</router-link>
       </li>
     </ul>
-
-    Logintext:
-    {{loginText}}
-
     <router-view></router-view>
   </div>
 </template>
@@ -35,7 +31,6 @@ export default {
     this.$http.get('/api/isauthenticated').then((response) => {
       if (response.status === 200) {
         console.log(response)
-        // this.loginText = response.data
         config.loginText = new Date()
       }
     })

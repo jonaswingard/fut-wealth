@@ -28,13 +28,13 @@ export default {
   }),
   beforeMount () {
     this.$http.get('/api/fitness/latest').then((response) => {
-      if (response.status === 200) {
+      if (response.status === 200 && response.data && response.data.length) {
         this.fitness = response.data[0].items
       }
     })
 
     this.$http.get('/api/trending/latest').then((response) => {
-      if (response.status === 200) {
+      if (response.status === 200 && response.data && response.data.length) {
         this.trending = response.data[0].items
       }
     })
