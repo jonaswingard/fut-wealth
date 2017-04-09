@@ -43,7 +43,7 @@ router.get('/logout', function(req, res) {
 });
 
 router.get('/ping', auth.isAuthenticated, function (req, res, next) {
-  res.status(200).send('pong');
+  res.status(200).send('pong - 1');
 });
 
 router.get('/isauthenticated', function (req, res, next) {
