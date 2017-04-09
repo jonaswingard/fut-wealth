@@ -50,7 +50,6 @@ passport.use(new LocalStrategy(Account.authenticate()));
 passport.serializeUser(Account.serializeUser());
 passport.deserializeUser(Account.deserializeUser());
 
-// develop
 mongoose.connect(process.env.MONGO_CONNECTION, { auth: { authdb: 'admin' } } );
 
 // catch 404 and forward to error handler
