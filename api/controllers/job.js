@@ -6,7 +6,7 @@ var Trending = require('../models/trending');
 var Fitness = require('../models/fitness');
 
 var job = new CronJob({
-  cronTime: '00 05 * * * *',
+  cronTime: '00 13 * * * *',
   onTick: function() {
     Trending.import().then(function (items) {
       Trending.save(items);
