@@ -5,7 +5,10 @@
     <br>
     <div v-for="fetch in fetched">
       <details>
-        <summary>{{filterDate(fetch.date)}}</summary>
+        <summary>
+          {{filterDate(fetch.date)}}
+          ({{fetch.items[2].price}})
+        </summary>
         <table>
           <thead>
             <tr>
