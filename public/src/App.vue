@@ -5,14 +5,17 @@
       <li class="menu-item">
         <router-link to="/">Start</router-link>
       </li>
-      <li class="menu-item">
-        <router-link to="/login">Login</router-link>
-      </li>
-      <li class="menu-item">
+      <li class="menu-item" v-if="user.authenticated">
         <router-link to="/trending">Trending</router-link>
       </li>
-      <li class="menu-item">
+      <li class="menu-item" v-if="user.authenticated">
         <router-link to="/fitness">Fitness</router-link>
+      </li>
+      <li class="menu-item" v-if="!user.authenticated">
+        <router-link to="/login">Login</router-link>
+      </li>
+      <li class="menu-item" v-if="user.authenticated">
+        <a href="#" v-if="user.authenticated" @click="onLogout()">Logout</a>
       </li>
     </ul>
     <router-view></router-view>
@@ -20,20 +23,20 @@
 </template>
 
 <script>
-import config from './config'
+import auth from './auth'
+
+auth.checkAuth()
 
 export default {
   name: 'app',
   data: () => ({
-    loginText: config.loginText
+    user: auth.user
   }),
-  beforeMount () {
-    this.$http.get('/api/isauthenticated').then((response) => {
-      if (response.status === 200) {
-        console.log(response)
-        config.loginText = new Date()
-      }
-    })
+  methods: {
+    onLogout: function () {
+      console.log(this)
+      auth.logout(this, '/login')
+    }
   }
 }
 </script>

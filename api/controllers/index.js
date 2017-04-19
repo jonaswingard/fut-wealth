@@ -4,8 +4,8 @@ var Account = require('../models/account');
 var auth = require ('./authentication');
 var router = express.Router();
 
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+router.get('/', (req, res, next) => {
+  res.render('index', { title: 'FUT-Wealth API' });
 });
 
 // router.get('/register', function(req, res) {
@@ -29,24 +29,24 @@ router.get('/', function(req, res, next) {
 //     });
 // });
 
-router.get('/login', function(req, res) {
-    res.render('login', { user : req.user });
+router.get('/login', (req, res) => {
+  res.render('login', { user : req.user });
 });
 
-router.post('/login', passport.authenticate('local'), function(req, res) {
-    res.redirect('/');
+router.post('/login', passport.authenticate('local'), (req, res) => {
+  res.redirect('/');
 });
 
-router.get('/logout', function(req, res) {
-    req.logout();
-    res.redirect('/');
+router.get('/logout', (req, res) => {
+  req.logout();
+  res.redirect('/');
 });
 
-router.get('/ping', auth.isAuthenticated, function (req, res, next) {
+router.get('/ping', auth.isAuthenticated, (req, res, next) => {
   res.status(200).send('pong');
 });
 
-router.get('/isauthenticated', function (req, res, next) {
+router.get('/isauthenticated', (req, res, next) => {
   res.send(req.isAuthenticated());
 });
 

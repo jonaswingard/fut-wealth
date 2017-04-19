@@ -12,13 +12,11 @@
         <router-link to="/">Cancel</router-link>
       </div>
     </form>
-    <br>
-    <button type="button" v-on:click="onLogout">Logout</button>
   </div>
 </template>
 
 <script>
-import config from '../config'
+import auth from '../auth'
 
 export default {
   name: 'login',
@@ -28,22 +26,10 @@ export default {
   }),
   methods: {
     onSubmit: function () {
-      this.$http.post('/api/login', {
+      auth.login(this, {
         username: this.username,
         password: this.password
-      }).then((response) => {
-        if (response.status === 200) {
-          this.$router.push('/')
-        }
-      })
-    },
-    onLogout: function () {
-      config.loginText = new Date()
-      // this.$http.get('/api/logout').then((response) => {
-      //   if (response.status === 200) {
-      //     this.$router.push('/')
-      //   }
-      // })
+      }, '/')
     }
   }
 }

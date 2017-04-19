@@ -10,7 +10,5 @@ https://www.codecourse.com/lessons/filters-in-vue-2
 
 Todo
 Moment to present time
-Jobb som importerar
 Jämföra spelare med tidigare importer
 websockets
-Hosta appen nånstans
