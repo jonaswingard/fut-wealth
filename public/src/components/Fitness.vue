@@ -1,8 +1,5 @@
 <template>
   <div class="fitness">
-    <button v-on:click="importFitness">Import</button>
-    <br>
-    <br>
     <div v-for="fetch in fetched">
       <details>
         <summary>
@@ -40,11 +37,6 @@ export default {
     fetched: []
   }),
   methods: {
-    importFitness: function (event) {
-      this.$http.post('/api/import/fitness').then((response) => {
-        this.fetched = response.data.items
-      })
-    },
     filterDate: function (date) {
       // TODO moment this
       // use as custom filter

@@ -1,8 +1,28 @@
 <template>
   <div class="trending">
-    <button v-on:click="importTrending">Import</button>
-    <br>
-    <br>
+
+    <input placeholder="Search player..." v-model="search">
+
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="item in filteredItems">
+          <td><strong>{{item.title}}</strong></td>
+          <td>{{item.price}}</td>
+          <td><time>{{filterDate(item.date)}}</time></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <hr>
+    <h3>History</h3>
+
     <div v-for="fetch in fetched">
       <details>
         <summary>{{filterDate(fetch.date)}}</summary>
@@ -35,19 +55,32 @@ export default {
     })
   },
   data: () => ({
-    fetched: []
+    fetched: [],
+    search: ''
   }),
   methods: {
-    importTrending: function (event) {
-      this.$http.post('/api/import/trending').then((response) => {
-        this.fetched = response.data.items
-      })
-    },
     filterDate: function (date) {
       // TODO moment this
       // use as custom filter
 
       return new Date(date).toLocaleString()
+    }
+  },
+  computed: {
+    filteredItems: function () {
+      let allItems = []
+
+      if (this.search && this.search.length >= 3 && this.fetched.length) {
+        for (const fetch of this.fetched) {
+          var item = fetch.items.find(item => item.title.toLowerCase().indexOf(this.search.toLowerCase()) >= 0)
+          if (item) {
+            item.date = fetch.date
+            allItems.push(item)
+          }
+        }
+      }
+
+      return allItems
     }
   }
 }
