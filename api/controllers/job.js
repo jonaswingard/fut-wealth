@@ -24,6 +24,12 @@ router.get('/', auth.isAuthenticated, function(req, res, next) {
   res.send('Job running: ' + isRunning );
 });
 
+router.get('/active', auth.isAuthenticated, (req,res,next) => {
+  var isRunning = typeof job.running !== 'undefined' && job.running;
+  res.send(isRunning);
+
+});
+
 router.get('/start', auth.isAuthenticated, function(req, res, next) {
   job.start()
   res.send('job successfully started');

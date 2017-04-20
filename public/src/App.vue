@@ -5,6 +5,9 @@
       <li class="menu-item">
         <router-link to="/">Start</router-link>
       </li>
+      <li class="menu-item">
+        <router-link v-if="user.authenticated" to="/config">Config</router-link>
+      </li>
       <li class="menu-item" v-if="user.authenticated">
         <router-link to="/trending">Trending</router-link>
       </li>

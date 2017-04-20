@@ -6,6 +6,7 @@ services:
       - "8080:8080"
     volumes:
       - ./public:/www
+      - /www/node_modules
     tty: true
   api:
     build: ./api
@@ -13,6 +14,7 @@ services:
       - "3000:3000"
     volumes:
       - ./api:/www
+      - /www/node_modules
     links:
       - mongo
     tty: true

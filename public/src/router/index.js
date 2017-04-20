@@ -1,9 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Hello from '@/components/Hello'
+import Start from '@/components/Start'
 import Trending from '@/components/Trending'
 import Fitness from '@/components/Fitness'
 import Login from '@/components/Login'
+import Config from '@/components/Config'
 
 Vue.use(Router)
 
@@ -11,8 +12,8 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Hello',
-      component: Hello
+      name: 'Start',
+      component: Start
     },
     {
       path: '/trending',
@@ -28,6 +29,11 @@ export default new Router({
       path: '/login',
       name: 'Login',
       component: Login
+    },
+    {
+      path: '/config',
+      name: 'Config',
+      component: Config
     }
   ]
 })

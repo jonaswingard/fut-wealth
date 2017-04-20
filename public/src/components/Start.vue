@@ -1,5 +1,5 @@
 <template>
-  <div class="hello">
+  <div>
     <h1>FUT Wealth</h1>
 
     <h2>Latest</h2>
@@ -35,7 +35,7 @@ export default {
 
     this.$http.get('/api/trending/latest').then((response) => {
       if (response.status === 200 && response.data && response.data.length) {
-        this.trending = response.data[0].items
+        this.trending = response.data[0].items.slice(0, 5)
       }
     })
   }
