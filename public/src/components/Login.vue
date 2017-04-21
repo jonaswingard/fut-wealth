@@ -1,19 +1,32 @@
 <template>
   <div>
     <h1 class="display-1">Login</h1>
+    <v-container fluid>
+      <v-row>
+        <v-col xs6>
+          <form v-on:submit.prevent="onSubmit">
+            <v-text-field
+              label="Username"
+              single-line
+              hide-details
+              v-model="username"
+            ></v-text-field>
+            <v-text-field
+              label="Password"
+              single-line
+              hide-details
+              type="password"
+              v-model="password"
+            ></v-text-field>
 
-    <form v-on:submit.prevent="onSubmit">
-      <div>
-        <input placeholder="username" v-model="username">
-      </div>
-      <div>
-        <input placeholder="password" type="password" v-model="password">
-      </div>
-      <div>
-        <button type="submit">Login</button>
-        <router-link to="/">Cancel</router-link>
-      </div>
-    </form>
+            <div>
+              <v-btn default type="submit">Login</v-btn>
+              <router-link to="/">Cancel</router-link>
+            </div>
+          </form>
+        </v-col>
+      </v-row>
+    </v-container>
   </div>
 </template>
 
