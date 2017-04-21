@@ -3,7 +3,7 @@
 
     <header>
       <v-toolbar>
-        <v-toolbar-logo>
+        <v-toolbar-logo class="hidden-sm-and-down">
           <img class="mr-3" src="/static/zlatan.png" width="40">
           FUT Wealth
         </v-toolbar-logo>

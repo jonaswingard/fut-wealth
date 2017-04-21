@@ -14,18 +14,29 @@
       <v-tab-content id="tab-1" slot="content">
         <v-card>
           <v-card-title>
-            Trending players
-            <v-spacer></v-spacer>
-            <v-text-field
-              append-icon="search"
-              label="Search"
-              single-line
-              hide-details
-              v-model="search"
-            ></v-text-field>
-            <v-btn icon="icon" class="black--text" @click.native="search = ''">
-              <v-icon>clear</v-icon>
-            </v-btn>
+            <v-container fluid>
+              <v-row>
+                <v-col md6>
+                  Trending players
+                </v-col>
+                <v-col sm11 md5>
+                  <v-text-field
+                    append-icon="search"
+                    label="Search"
+                    single-line
+                    hide-details
+                    v-model="search"
+                  ></v-text-field>
+                </v-col>
+                <v-col sm1>
+                  <v-spacer></v-spacer>
+
+                  <v-btn icon="icon" class="black--text" @click.native="search = ''">
+                    <v-icon>clear</v-icon>
+                  </v-btn>
+                </v-col>
+              </v-row>
+            </v-container>
           </v-card-title>
           <table>
             <thead>
