@@ -1,28 +1,40 @@
 <template>
   <div class="fitness">
-    <div v-for="fetch in fetched">
-      <details>
-        <summary>
-          {{filterDate(fetch.date)}}
-          ({{fetch.items[2].price}})
-        </summary>
-        <table>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Price</th>
-              <th>+/-</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="item in fetch.items">
-              <td>{{item.title}}</td>
-              <td>{{item.price}}</td>
-            </tr>
-          </tbody>
-        </table>
-      </details>
-    </div>
+    <h1 class="display-1">Fitness</h1>
+
+    <v-tabs id="mobile-tabs-4" grow icons>
+      <v-tab-item href="#tab-1" slot="activators">
+        History
+        <v-icon>history</v-icon>
+      </v-tab-item>
+      <v-tab-content id="tab-1" slot="content">
+        <v-expansion-panel>
+          <v-expansion-panel-content v-for="fetch in fetched" :key="fetch._id">
+            <div slot="header">
+              {{filterDate(fetch.date)}}
+              -
+              ({{fetch.items[2].price}})
+            </div>
+            <v-card-text class="white">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Price</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="item in fetch.items">
+                    <td>{{item.title}}</td>
+                    <td>{{item.price}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </v-card-text>
+          </v-expansion-panel-content>
+        </v-expansion-panel>
+      </v-tab-content>
+    </v-tabs>
   </div>
 </template>
 
@@ -55,9 +67,6 @@ export default {
   }),
   methods: {
     filterDate: function (date) {
-      // TODO moment this
-      // use as custom filter
-
       return new Date(date).toLocaleString()
     }
   }

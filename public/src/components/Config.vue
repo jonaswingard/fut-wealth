@@ -1,16 +1,24 @@
 <template>
   <div>
-    <section>
-      <h2>Job</h2>
-      <p>Import job running: {{job.active}}</p>
-      <button v-if="!job.active" v-on:click="startJob">Start</button>
-      <button v-if="job.active" v-on:click="stopJob">Stop</button>
-    </section>
+    <h1 class="display-1">Config</h1>
 
-    <section>
-      <h2>Import</h2>
-      <button v-on:click="importAll" v-bind:disabled="isLoading">Import all</button>
-    </section>
+    <v-container fluid>
+      <v-row>
+        <v-col xs12>
+          <v-card class="grey lighten-4 elevation-0">
+            <v-card-text>
+              <v-switch label="Auto-import" primary v-model="job.active" />
+              <v-btn
+                success
+                v-bind:loading="isLoading"
+                v-on:click.native="importAll"
+                v-bind:disabled="isLoading"
+              >Import all</v-btn>
+            </v-card-text>
+          </v-card>
+        </v-col>
+      </v-row>
+    </v-container>
 
   </div>
 </template>
@@ -25,10 +33,24 @@ export default {
   },
   data: () => ({
     job: {
-      active: false
+      active: false,
+      foobar: false
     },
     isLoading: false
   }),
+  watch: {
+    '$data': {
+      handler: function () {
+        if (this.job.active) {
+          this.startJob()
+        } else {
+          // this.methods.stopJob()
+          this.stopJob()
+        }
+      },
+      deep: true
+    }
+  },
   methods: {
     startJob: function () {
       this.$http.get('/api/job/start').then((response) => {

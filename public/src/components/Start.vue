@@ -1,8 +1,8 @@
 <template>
   <div>
-    <h1>FUT Wealth</h1>
+    <h1 class="display-1">Home</h1>
 
-    <h2>Latest</h2>
+    <h2 class="headline">Latest</h2>
     <div class="container">
       <div>
         <strong>Fitness</strong>
@@ -27,17 +27,17 @@ export default {
     fitness: []
   }),
   beforeMount () {
-    this.$http.get('/api/fitness/latest').then((response) => {
-      if (response.status === 200 && response.data && response.data.length) {
-        this.fitness = response.data[0].items
-      }
-    })
-
-    this.$http.get('/api/trending/latest').then((response) => {
-      if (response.status === 200 && response.data && response.data.length) {
-        this.trending = response.data[0].items.slice(0, 5)
-      }
-    })
+    // this.$http.get('/api/fitness/latest').then((response) => {
+    //   if (response.status === 200 && response.data && response.data.length) {
+    //     this.fitness = response.data[0].items
+    //   }
+    // })
+    //
+    // this.$http.get('/api/trending/latest').then((response) => {
+    //   if (response.status === 200 && response.data && response.data.length) {
+    //     this.trending = response.data[0].items.slice(0, 5)
+    //   }
+    // })
   }
 }
 </script>

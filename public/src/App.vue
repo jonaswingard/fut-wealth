@@ -1,28 +1,32 @@
 <template>
-  <div id="app">
-    <img src="./assets/zlatan.png" width="100">
-    <ul class="menu">
-      <li class="menu-item">
-        <router-link to="/">Start</router-link>
-      </li>
-      <li class="menu-item">
-        <router-link v-if="user.authenticated" to="/config">Config</router-link>
-      </li>
-      <li class="menu-item" v-if="user.authenticated">
-        <router-link to="/trending">Trending</router-link>
-      </li>
-      <li class="menu-item" v-if="user.authenticated">
-        <router-link to="/fitness">Fitness</router-link>
-      </li>
-      <li class="menu-item" v-if="!user.authenticated">
-        <router-link to="/login">Login</router-link>
-      </li>
-      <li class="menu-item" v-if="user.authenticated">
-        <a href="#" v-if="user.authenticated" @click="onLogout()">Logout</a>
-      </li>
-    </ul>
-    <router-view></router-view>
-  </div>
+  <v-app top-toolbar>
+
+    <header>
+      <v-toolbar>
+        <v-toolbar-logo>
+          <img class="mr-3" src="/static/zlatan.png" width="40">
+          FUT Wealth
+        </v-toolbar-logo>
+        <v-toolbar-items>
+           <v-toolbar-item href="#">Home</v-toolbar-item>
+           <v-toolbar-item href="#config" v-if="user.authenticated">Config</v-toolbar-item>
+           <v-toolbar-item href="#trending" v-if="user.authenticated">Trending</v-toolbar-item>
+           <v-toolbar-item href="#fitness" v-if="user.authenticated">Fitness</v-toolbar-item>
+           <v-toolbar-item href="#login" v-if="!user.authenticated">Login</v-toolbar-item>
+           <v-toolbar-item v-if="user.authenticated" @click.native="onLogout()">Logout</v-toolbar-item>
+        </v-toolbar-items>
+      </v-toolbar>
+    </header>
+
+    <main>
+      <v-content>
+        <v-container>
+          <router-view></router-view>
+        </v-container>
+      </v-content>
+    </main>
+
+  </v-app>
 </template>
 
 <script>
@@ -37,32 +41,8 @@ export default {
   }),
   methods: {
     onLogout: function () {
-      console.log(this)
       auth.logout(this, '/login')
     }
   }
 }
 </script>
-
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-ul.menu {
-  list-style-type: none;
-  padding: 0;
-}
-
-li.menu-item {
-  display: inline-block;
-  margin: 0 10px;
-}
-.menu-item a {
-  color: #42b983;
-}
-</style>

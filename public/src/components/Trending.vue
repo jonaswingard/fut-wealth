@@ -1,38 +1,32 @@
 <template>
   <div class="trending">
+    <h1 class="display-1">Trending players</h1>
 
-    <section>
-      <input placeholder="Search player..." v-model="search">
-      <button v-on:click="search = ''">Reset</button>
-    </section>
-
-    <section>
-      <table v-if="search">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Price</th>
-            <th>Date</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="item in filteredItems">
-            <td><strong>{{item.title}}</strong></td>
-            <td>{{item.price}}</td>
-            <td><time>{{filterDate(item.date)}}</time></td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
-
-    <hr>
-
-    <section>
-      <h3>History</h3>
-
-      <div v-for="fetch in fetched">
-        <details>
-          <summary>{{filterDate(fetch.date)}}</summary>
+    <v-tabs id="mobile-tabs-4" grow icons>
+      <v-tab-item href="#tab-1" slot="activators">
+        Players
+        <v-icon>trending_up</v-icon>
+      </v-tab-item>
+      <v-tab-item href="#tab-2" slot="activators">
+        History
+        <v-icon>history</v-icon>
+      </v-tab-item>
+      <v-tab-content id="tab-1" slot="content">
+        <v-card>
+          <v-card-title>
+            Trending players
+            <v-spacer></v-spacer>
+            <v-text-field
+              append-icon="search"
+              label="Search"
+              single-line
+              hide-details
+              v-model="search"
+            ></v-text-field>
+            <v-btn icon="icon" class="black--text" @click.native="search = ''">
+              <v-icon>clear</v-icon>
+            </v-btn>
+          </v-card-title>
           <table>
             <thead>
               <tr>
@@ -42,18 +36,42 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="item in fetch.items">
-                <td>{{item.title}}</td>
+              <tr v-for="item in filteredItems">
+                <td><strong>{{item.title}}</strong></td>
                 <td>{{item.price}}</td>
-                <td>{{item.trend}}</td>
+                <td><time>{{filterDate(item.date)}}</time></td>
               </tr>
             </tbody>
           </table>
-        </details>
-      </div>
+        </v-card>
+      </v-tab-content>
+      <v-tab-content id="tab-2" slot="content">
+        <v-expansion-panel>
+          <v-expansion-panel-content v-for="fetch in fetched" :key="fetch._id">
+            <div slot="header">{{filterDate(fetch.date)}}</div>
+            <v-card-text class="white">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>+/-</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="item in fetch.items">
+                    <td>{{item.title}}</td>
+                    <td>{{item.price}}</td>
+                    <td>{{item.trend}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </v-card-text>
+          </v-expansion-panel-content>
+        </v-expansion-panel>
+      </v-tab-content>
+    </v-tabs>
 
-    </section>
-    
   </div>
 </template>
 
@@ -66,7 +84,9 @@ export default {
   },
   data: () => ({
     fetched: [],
-    search: ''
+    search: '',
+    foobar: [],
+    headers: ['foo', 'bar']
   }),
   methods: {
     filterDate: function (date) {
@@ -88,6 +108,12 @@ export default {
             allItems.push(item)
           }
         }
+      } else if (this.fetched.length) {
+        var firstFetch = this.fetched[0]
+        allItems = firstFetch.items.map(item => {
+          item.date = firstFetch.date
+          return item
+        })
       }
 
       return allItems
