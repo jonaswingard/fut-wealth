@@ -11,15 +11,15 @@ router.get('/', (req, res, next) => {
 router.post('/trending', auth.isAuthenticated, (req, res, next) => {
   Trending.import().then(items => {
     Trending.save(items).then(() => {
-      res.send('ok');
+      res.send(items);
     });
   });
 });
 
 router.post('/fitness', auth.isAuthenticated, (req, res, next) => {
   Fitness.import().then(items => {
-    Fitness.save(items).then(() => {
-      res.send('ok');
+    Fitness.save(items).then(result => {
+      res.send(items);
     });
   });
 });

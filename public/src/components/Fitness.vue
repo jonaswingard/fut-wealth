@@ -27,10 +27,27 @@
 </template>
 
 <script>
+function clearSamePrices (items) {
+  const filteredItems = []
+  let lastPrice
+
+  for (const item of items) {
+    const [,, gold] = item.items
+    if (lastPrice === gold.price) {
+      continue
+    }
+
+    lastPrice = gold.price
+    filteredItems.push(item)
+  }
+
+  return filteredItems
+}
+
 export default {
   beforeMount () {
     this.$http.get('/api/fitness').then((response) => {
-      this.fetched = response.data
+      this.fetched = clearSamePrices(response.data)
     })
   },
   data: () => ({

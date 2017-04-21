@@ -50,6 +50,7 @@ export default {
         this.$http.post('/api/import/fitness'),
         this.$http.post('/api/import/trending')
       ]).then(values => {
+        console.dir(values)
         this.isLoading = false
       })
     }

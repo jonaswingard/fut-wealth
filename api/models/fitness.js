@@ -5,13 +5,13 @@ const jquery = 'http://code.jquery.com/jquery.js';
 
 
 var Fitness = mongoose.model('Fitness', new Schema({
-    date: Date,
-    items: [
-      {
-        title: String,
-        price: Number
-      }
-    ]
+  date: Date,
+  items: [
+    {
+      title: String,
+      price: Number
+    }
+  ]
 }));
 
 mongoose.Promise = global.Promise;

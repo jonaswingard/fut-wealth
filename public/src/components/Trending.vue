@@ -1,49 +1,59 @@
 <template>
   <div class="trending">
 
-    <input placeholder="Search player..." v-model="search">
+    <section>
+      <input placeholder="Search player..." v-model="search">
+      <button v-on:click="search = ''">Reset</button>
+    </section>
 
-    <table>
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Price</th>
-          <th>Date</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="item in filteredItems">
-          <td><strong>{{item.title}}</strong></td>
-          <td>{{item.price}}</td>
-          <td><time>{{filterDate(item.date)}}</time></td>
-        </tr>
-      </tbody>
-    </table>
+    <section>
+      <table v-if="search">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="item in filteredItems">
+            <td><strong>{{item.title}}</strong></td>
+            <td>{{item.price}}</td>
+            <td><time>{{filterDate(item.date)}}</time></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
 
     <hr>
-    <h3>History</h3>
 
-    <div v-for="fetch in fetched">
-      <details>
-        <summary>{{filterDate(fetch.date)}}</summary>
-        <table>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Price</th>
-              <th>+/-</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="item in fetch.items">
-              <td>{{item.title}}</td>
-              <td>{{item.price}}</td>
-              <td>{{item.trend}}</td>
-            </tr>
-          </tbody>
-        </table>
-      </details>
-    </div>
+    <section>
+      <h3>History</h3>
+
+      <div v-for="fetch in fetched">
+        <details>
+          <summary>{{filterDate(fetch.date)}}</summary>
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>+/-</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="item in fetch.items">
+                <td>{{item.title}}</td>
+                <td>{{item.price}}</td>
+                <td>{{item.trend}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </details>
+      </div>
+
+    </section>
+    
   </div>
 </template>
 
