@@ -1,5 +1,5 @@
-<style scoped src="./trending.css"></style>
-<template src="./trending.html"></template>
+<style scoped src="./Trending.css"></style>
+<template src="./Trending.html"></template>
 
 <script>
 export default {
