@@ -1,5 +1,6 @@
 const LOGIN_URL = '/api/login'
 const LOGOUT_URL = '/api/logout'
+const CHECKAUTH_URL = '/api/isauthenticated'
 
 export default {
   user: {
@@ -31,14 +32,14 @@ export default {
     })
   },
 
-  checkAuth () {
-    var jwt = localStorage.getItem('id_token')
+  checkAuth (context, redirect) {
+    context.$http.get(CHECKAUTH_URL).then((response) => {
+      this.user.authenticated = response.data
 
-    if (jwt) {
-      this.user.authenticated = true
-    } else {
-      this.user.authenticated = false
-    }
+      if (!response.data && redirect) {
+        context.$router.push(redirect)
+      }
+    })
   }
 
 }
