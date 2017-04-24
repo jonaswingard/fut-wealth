@@ -1,6 +1,8 @@
 <template src="./Trending.html"></template>
 
 <script>
+import date from '../../services/date'
+
 export default {
   data: () => ({
     fetched: [],
@@ -14,11 +16,8 @@ export default {
     })
   },
   methods: {
-    filterDate: function (date) {
-      // TODO moment this
-      // use as custom filter
-
-      return new Date(date).toLocaleString()
+    filterDate: function (dateStr) {
+      return date.fromNow(this, dateStr)
     }
   },
   computed: {

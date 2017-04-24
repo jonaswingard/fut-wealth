@@ -1,6 +1,8 @@
 <template src="./Fitness.html"></template>
 
 <script>
+import date from '../../services/date'
+
 function clearSamePrices (items) {
   const filteredItems = []
   let lastPrice
@@ -30,8 +32,8 @@ export default {
     })
   },
   methods: {
-    filterDate: function (date) {
-      return new Date(date).toLocaleString()
+    filterDate: function (dateStr) {
+      return date.fromNow(this, dateStr)
     }
   }
 }

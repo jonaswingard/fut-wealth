@@ -6,11 +6,14 @@ import router from './router'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import Vuetify from 'vuetify'
+import moment from 'vue-moment-jalaali'
 
 Vue.config.productionTip = false
 
 Vue.use(VueAxios, axios)
 Vue.use(Vuetify)
+Vue.use(moment)
+// Vue.use(require('vue-moment-jalaali'))
 
 /* eslint-disable no-new */
 new Vue({

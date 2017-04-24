@@ -1,7 +1,6 @@
 <template>
   <div>
     <h1 class="display-1">Config</h1>
-
     <v-container fluid>
       <v-row>
         <v-col xs12>
