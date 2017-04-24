@@ -1,0 +1,88 @@
+<div class="trending">
+  <h1 class="display-1">Trending players</h1>
+
+  <v-tabs id="mobile-tabs-4" grow icons>
+    <v-tab-item href="#tab-1" slot="activators">
+      Players
+      <v-icon>trending_up</v-icon>
+    </v-tab-item>
+    <v-tab-item href="#tab-2" slot="activators">
+      History
+      <v-icon>history</v-icon>
+    </v-tab-item>
+    <v-tab-content id="tab-1" slot="content">
+      <v-card>
+        <v-card-title>
+          <v-container fluid>
+            <v-row>
+              <v-col md6>
+                Trending players
+              </v-col>
+              <v-col sm11 md5>
+                <v-text-field
+                  append-icon="search"
+                  label="Search"
+                  single-line
+                  hide-details
+                  v-model="search"
+                ></v-text-field>
+              </v-col>
+              <v-col sm1>
+                <v-spacer></v-spacer>
+
+                <v-btn icon="icon" class="black--text" @click.native="search = ''">
+                  <v-icon>clear</v-icon>
+                </v-btn>
+              </v-col>
+            </v-row>
+          </v-container>
+        </v-card-title>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Price</th>
+              <th>+/-</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="item in filteredItems">
+              <td><strong>{{item.title}}</strong></td>
+              <td>{{item.price}}</td>
+              <td><time>{{filterDate(item.date)}}</time></td>
+            </tr>
+          </tbody>
+        </table>
+      </v-card>
+      <v-card v-if="loading" class="text-xs-center py-5 custom-loader">
+        <v-icon x-large>cached</v-icon>
+      </v-card>
+    </v-tab-content>
+    <v-tab-content id="tab-2" slot="content">
+      <v-expansion-panel>
+        <v-expansion-panel-content v-for="fetch in fetched" :key="fetch._id">
+          <div slot="header">{{filterDate(fetch.date)}}</div>
+          <v-card-text class="white">
+            <table>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Price</th>
+                  <th>+/-</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="item in fetch.items">
+                  <td>{{item.title}}</td>
+                  <td>{{item.price}}</td>
+                  <td>{{item.trend}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </v-card-text>
+        </v-expansion-panel-content>
+      </v-expansion-panel>
+    </v-tab-content>
+  </v-tabs>
+
+</div>

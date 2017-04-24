@@ -16,7 +16,7 @@
               ({{fetch.items[2].price}})
             </div>
             <v-card-text class="white">
-              <table>
+              <table class="table">
                 <thead>
                   <tr>
                     <th>Name</th>
@@ -72,12 +72,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-  table {
-    margin: 0 auto;
-  }
-  summary {
-    cursor: pointer;
-  }
-</style>
