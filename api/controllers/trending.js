@@ -15,10 +15,4 @@ router.get('/latest', auth.isAuthenticated, (req, res, next) => {
   });
 });
 
-router.get('/clean', auth.isAuthenticated, (req, res, next) => {
-  Trending.clean().then(result => {
-    res.send(result);
-  });
-});
-
 module.exports = router;
