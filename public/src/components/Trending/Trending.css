@@ -1,6 +1,7 @@
 .custom-loader {
   animation: loader 1s infinite;
 }
+
 @keyframes loader {
   from {
     transform: rotate(0)
