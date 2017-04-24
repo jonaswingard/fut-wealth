@@ -43,8 +43,8 @@ module.exports = {
       			var item = $(this);
       			return {
       				title: item.find('a').text(),
-      				price: item.find('td:eq(0)').children().remove().end().text().trim().replace(',',''),
-      				trend: item.find('td:last').text().replace(/[^0-9\.]/g, '')
+      				price: item.find('td:eq(0)').children().remove().end().text().trim().replace(/[^0-9\.]/g, ''),
+      				trend: item.find('td:last').text().replace(/\s+/g, '')
       			};
       		}).toArray();
 
