@@ -3,20 +3,26 @@
     <h1 class="display-1">Home</h1>
 
     <h2 class="headline">Latest</h2>
-    <div class="container">
-      <div>
-        <strong>Fitness</strong>
-        <div v-for="item in fitness">
-          {{item.title}} ({{item.price}})
-        </div>
-      </div>
-      <div>
-        <strong>Trending</strong>
-        <div v-for="item in trending">
-          {{item.title}} {{item.price}}
-        </div>
-      </div>
-    </div>
+
+    <v-card class="pa-5">
+      <v-container fluid>
+        <v-row>
+          <v-col sm6>
+            <strong>Fitness</strong>
+            <div v-for="item in fitness">
+              {{item.title}} ({{item.price}})
+            </div>
+          </v-col>
+          <v-col sm6>
+            <strong>Trending</strong>
+            <div v-for="item in trending">
+              {{item.title}} {{item.price}}
+            </div>
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-card>
+
   </div>
 </template>
 
@@ -27,31 +33,17 @@ export default {
     fitness: []
   }),
   beforeMount () {
-    // this.$http.get('/api/fitness/latest').then((response) => {
-    //   if (response.status === 200 && response.data && response.data.length) {
-    //     this.fitness = response.data[0].items
-    //   }
-    // })
-    //
-    // this.$http.get('/api/trending/latest').then((response) => {
-    //   if (response.status === 200 && response.data && response.data.length) {
-    //     this.trending = response.data[0].items.slice(0, 5)
-    //   }
-    // })
+    this.$http.get('/api/fitness/latest').then((response) => {
+      if (response.status === 200 && response.data && response.data.length) {
+        this.fitness = response.data[0].items
+      }
+    })
+
+    this.$http.get('/api/trending/latest').then((response) => {
+      if (response.status === 200 && response.data && response.data.length) {
+        this.trending = response.data[0].items.slice(0, 5)
+      }
+    })
   }
 }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h1, h2 {
-  font-weight: normal;
-}
-.container {
-  display: flex;
-  justify-content: center;
-}
-.container > div {
-  width: 40%;
-}
-</style>
