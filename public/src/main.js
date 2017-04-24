@@ -13,7 +13,6 @@ Vue.config.productionTip = false
 Vue.use(VueAxios, axios)
 Vue.use(Vuetify)
 Vue.use(moment)
-// Vue.use(require('vue-moment-jalaali'))
 
 /* eslint-disable no-new */
 new Vue({

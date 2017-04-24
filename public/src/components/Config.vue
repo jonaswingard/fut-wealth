@@ -7,6 +7,10 @@
           <v-card class="grey lighten-4 elevation-0">
             <v-card-text>
               <v-switch label="Auto-import" primary v-model="job.active" />
+              <div class="pb-3" v-if="job.latestImport">
+                Last successful import:
+                <strong>{{job.latestImport | moment("YYYY-MM-DD HH:mm")}}</strong>
+              </div>
               <v-btn
                 success
                 v-bind:loading="isLoading"
@@ -23,17 +27,15 @@
 </template>
 
 <script>
-
 export default {
   beforeMount () {
-    this.$http.get('/api/job/active').then((response) => {
-      this.job.active = response.data
-    })
+    this.jobIsActive()
+    this.getLatestJob()
   },
   data: () => ({
     job: {
       active: false,
-      foobar: false
+      latestImport: ''
     },
     isLoading: false
   }),
@@ -43,7 +45,6 @@ export default {
         if (this.job.active) {
           this.startJob()
         } else {
-          // this.methods.stopJob()
           this.stopJob()
         }
       },
@@ -51,27 +52,37 @@ export default {
     }
   },
   methods: {
-    startJob: function () {
+    jobIsActive () {
+      this.$http.get('/api/job/active').then((response) => {
+        this.job.active = response.data
+      })
+    },
+    getLatestJob () {
+      this.$http.get('/api/fitness/latest').then((response) => {
+        this.job.latestImport = response.data[0].date
+      })
+    },
+    startJob () {
       this.$http.get('/api/job/start').then((response) => {
         this.$http.get('/api/job/active').then((response) => {
           this.job.active = response.data
         })
       })
     },
-    stopJob: function () {
+    stopJob () {
       this.$http.get('/api/job/stop').then((response) => {
         this.$http.get('/api/job/active').then((response) => {
           this.job.active = response.data
         })
       })
     },
-    importAll: function () {
+    importAll () {
       this.isLoading = true
       Promise.all([
         this.$http.post('/api/import/fitness'),
         this.$http.post('/api/import/trending')
       ]).then(values => {
-        console.dir(values)
+        this.getLatestJob()
         this.isLoading = false
       })
     }

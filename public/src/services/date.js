@@ -1,6 +1,6 @@
 export default {
-  fromNow: function (context, date) {
+  fromNow (context, date) {
     const moment = context.$moment
-    return moment(date, 'jYYYY/jM/jD').fromNow()
+    return moment(date, 'YYYY/M/D').fromNow()
   }
 }
