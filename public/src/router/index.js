@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Start from '@/components/Start'
 import Trending from '@/components/Trending/Trending'
-import Fitness from '@/components/Fitness'
+import Fitness from '@/components/Fitness/Fitness'
 import Login from '@/components/Login'
 import Config from '@/components/Config'
 

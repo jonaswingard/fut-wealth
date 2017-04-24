@@ -11,7 +11,7 @@
       <v-icon>history</v-icon>
     </v-tab-item>
     <v-tab-content id="tab-1" slot="content">
-      <v-card>
+      <v-card v-if="!loading">
         <v-card-title>
           <v-container fluid>
             <v-row>

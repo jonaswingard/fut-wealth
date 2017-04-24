@@ -1,19 +1,18 @@
-<style scoped src="./Trending.css"></style>
 <template src="./Trending.html"></template>
 
 <script>
 export default {
+  data: () => ({
+    fetched: [],
+    search: '',
+    loading: true
+  }),
   beforeMount () {
     this.$http.get('/api/trending').then((response) => {
       this.fetched = response.data
       this.loading = false
     })
   },
-  data: () => ({
-    fetched: [],
-    search: '',
-    loading: true
-  }),
   methods: {
     filterDate: function (date) {
       // TODO moment this
