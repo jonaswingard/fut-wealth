@@ -12,12 +12,31 @@
           </v-toolbar-items>
         </v-toolbar-logo>
         <v-toolbar-items>
-           <v-toolbar-item ripple href="#">Home</v-toolbar-item>
-           <v-toolbar-item ripple href="#config" v-if="user.authenticated">Config</v-toolbar-item>
-           <v-toolbar-item ripple href="#trending" v-if="user.authenticated">Trending</v-toolbar-item>
-           <v-toolbar-item ripple href="#fitness" v-if="user.authenticated">Fitness</v-toolbar-item>
-           <v-toolbar-item ripple href="#login" v-if="!user.authenticated">Login</v-toolbar-item>
-           <v-toolbar-item ripple v-if="user.authenticated" @click.native="onLogout()">Logout</v-toolbar-item>
+          
+           <router-link tag="li" to="/" exact>
+             <a class="toolbar__item">Home</a>
+           </router-link>
+
+           <router-link tag="li" to="/trending" v-if="user.authenticated">
+             <a class="toolbar__item">Trending</a>
+           </router-link>
+
+           <router-link tag="li" to="/fitness" v-if="user.authenticated">
+             <a class="toolbar__item">Fitness</a>
+           </router-link>
+
+           <router-link tag="li" to="/config" v-if="user.authenticated">
+             <a class="toolbar__item">Config</a>
+           </router-link>
+
+           <router-link tag="li" to="/login" v-if="!user.authenticated">
+             <a class="toolbar__item">Login</a>
+           </router-link>
+
+           <li v-if="user.authenticated">
+             <a href="#" @click.prevent="onLogout()" class="toolbar__item">Logout</a>
+           </li>
+
         </v-toolbar-items>
       </v-toolbar>
     </header>
@@ -53,6 +72,19 @@ export default {
 </script>
 
 <style>
+
+.router-link-active {
+  position: relative;
+}
+.router-link-active:before {
+  content: "";
+  position: absolute;
+  height: 5px;
+  width: 100%;
+  bottom: 0;
+  background: #fff;
+}
+
 .custom-loader {
   animation: loader 1s infinite;
 }
