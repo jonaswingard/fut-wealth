@@ -4,14 +4,14 @@ var jsdom = require('node-jsdom');
 const jquery = 'http://code.jquery.com/jquery.js';
 
 var Trending = mongoose.model('Trending', new Schema({
-    date: Date,
-    items: [
-	    {
-	      title: String,
-	      price: String,
-				trend: String
-	    }
-    ]
+  date: Date,
+  items: [
+    {
+      title: String,
+      price: String,
+			trend: String
+    }
+  ]
 }));
 
 mongoose.Promise = global.Promise;
@@ -31,6 +31,17 @@ module.exports = {
     } else {
       return Trending.find().sort({date: -1});
     }
+  },
+  clean: function () {
+    return Trending.find(function (err, items) {
+      for (topItem of items) {
+        for (item of topItem.items) {
+          item.price = item.price.replace(/[^0-9\.]/g, '');
+        }
+
+        topItem.save();
+      }
+    });
   },
   import: function () {
     return new Promise((resolve, reject) => {
