@@ -12,7 +12,7 @@
           </v-toolbar-items>
         </v-toolbar-logo>
         <v-toolbar-items>
-          
+
            <router-link tag="li" to="/" exact>
              <a class="toolbar__item">Home</a>
            </router-link>
@@ -73,10 +73,10 @@ export default {
 
 <style>
 
-.router-link-active {
+nav .router-link-active {
   position: relative;
 }
-.router-link-active:before {
+nav .router-link-active:before {
   content: "";
   position: absolute;
   height: 5px;
